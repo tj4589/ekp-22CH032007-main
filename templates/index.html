@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Emotion Detection</title>
+    <style>
+      body {
+        font-family: Arial;
+        text-align: center;
+        padding: 50px;
+        background: #f0f2f5;
+      }
+
+      img {
+        border-radius: 8px;
+        margin-top: 10px;
+        max-width: 400px;
+      }
+
+      #emotion {
+        font-size: 24px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      .container {
+        display: inline-block;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Facial Emotion Recognition</h2>
+
+      <!-- Upload Section -->
+      <h3>Upload an Image</h3>
+      <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required /><br /><br />
+        <button type="submit">Upload & Predict</button>
+      </form>
+
+      {% if filename %}
+      <h3>Result:</h3>
+      <img
+        src="{{ url_for('static', filename='uploads/' + filename) }}"
+        alt="Uploaded Image"
+      />
+      <p><strong>Predicted Emotion:</strong> {{ emotion }}</p>
+      {% elif emotion %}
+      <p><strong>{{ emotion }}</strong></p>
+      {% endif %}
+    </div>
+  </body>
+</html>
